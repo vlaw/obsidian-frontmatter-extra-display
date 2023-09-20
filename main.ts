@@ -1,5 +1,5 @@
 import {Plugin, View, WorkspaceLeaf} from 'obsidian';
-// import {App, PluginSettingTab, Setting} from 'obsidian';
+// import {App, PluginSettingTab, Setting, TFolder} from 'obsidian';
 
 // interface MyPluginSettings {
 // 	mySetting: string;
@@ -11,12 +11,13 @@ import {Plugin, View, WorkspaceLeaf} from 'obsidian';
 
 function fileItems(fileExplorer: WorkspaceLeaf) {
 	const view: View = fileExplorer.view;
+	// console.log(typeof view)
 	type ObjectKey = keyof typeof view;
 	const keyFileItems = 'fileItems' as ObjectKey;
 	return view[keyFileItems];
 }
 
-function removeExtraDiv(el: any): void {
+function removeExtraDiv(el: HTMLDivElement): void {
 	const aliasDiv = el.querySelector('.file-alias')
 	if (aliasDiv) {
 		aliasDiv.remove();
@@ -38,7 +39,7 @@ export default class FrontmatterExtraDisplay extends Plugin {
 
 		for (const file of Object.values(files)) {
 			if (file.file) {
-				const el = file.selfEl;
+				const el = file["selfEl"];
 				if(el){
 					removeExtraDiv(el);
 
