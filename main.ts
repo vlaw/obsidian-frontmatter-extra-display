@@ -20,6 +20,7 @@ function fileItems(fileExplorer: WorkspaceLeaf) {
 function removeExtraDiv(el: HTMLDivElement): void {
 	const aliasDiv = el.querySelector('.file-alias')
 	if (aliasDiv) {
+		console.log(`removing ${aliasDiv}` )
 		aliasDiv.remove();
 	}
 }
@@ -70,7 +71,7 @@ export default class FrontmatterExtraDisplay extends Plugin {
 		const files = fileItems(fileExplorer);
 		for (const file of Object.values(files)) {
 			if (file.file) {
-				const el = file.selfEl;
+				const el = file["selfEl"];
 				if (el) {
 					removeExtraDiv(el);
 				}
